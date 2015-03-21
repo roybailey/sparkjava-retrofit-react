@@ -1,2 +1,15 @@
-# sparkjava-retrofit-react
-Demonstration of Java8 running SparkJava web application with ReactJS via Nashorn and tested with Retrofit
+# SparkJava Retrofit React Demonstration
+
+Java8 sandpit project showing web application built with
+
+what | description
+-----|------------
+`gradle build` | to compile and run the tests
+
+package | description
+--------|------------
+`com.sparkjava:spark-core` | SparkJava
+`com.squareup.retrofit:retrofit` | Retrofit
+`reactjs` | React
+
+Please see license.  No guarantees anything still works.

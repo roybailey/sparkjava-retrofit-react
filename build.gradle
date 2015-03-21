@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.slf4j:slf4j-api:1.7.10')
+    compile('org.slf4j:slf4j-log4j12:1.7.10')
+    compile('com.sparkjava:spark-core:2.1') {
+        exclude group: 'org.slf4j'
+    }
+    compile('com.squareup.retrofit:retrofit:1.9.0')
+    compile('com.squareup.okhttp:okhttp-urlconnection:2.2.0')
+    compile('com.squareup.okhttp:okhttp:2.2.0')
+    compile('com.google.guava:guava:18.0')
+    testCompile('junit:junit:4.12')
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '1.0'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Research SparkJava, Retrofit, React', 'Implementation-Version': version
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenLocal()
+    }
+}
+
+task pom << {
+    println "${project.group}::${project.version}"
+    pom {
+        project {
+            groupId 'me.roybailey'
+            artifactId 'sparkjava-retrofit-react'
+            version '1.0.0-SNAPSHOT'
+        }
+    }.writeTo("pom.xml")
+}
