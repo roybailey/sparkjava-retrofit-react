@@ -6,7 +6,7 @@ import spark.ResponseTransformer;
 
 public class JsonTransformer implements ResponseTransformer {
 
-    private Gson jsonService = new Gson();
+    private Gson jsonService = JsonUtil.DefaultGsonBuilder.create();
 
     @Override
     public String render(Object model) {
