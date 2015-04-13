@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
 
 var TitleView = React.createClass({
-	render: function() {
-		return <h1>{this.props.text}</h1>;
-	}
+    render: function() {
+        return <h1>{this.props.text}</h1>;
+    }
 });
 
-var renderTitle = function (text) {
+var renderTitle = function (javaProps) {
     return React.renderToString(
-        React.createElement(TitleView, {text: text})
+        React.createElement(TitleView, {text: javaProps.title})
     );
 };

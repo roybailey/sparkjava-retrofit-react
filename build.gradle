@@ -16,6 +16,7 @@ dependencies {
     compile('com.squareup.okhttp:okhttp-urlconnection:2.2.0')
     compile('com.squareup.okhttp:okhttp:2.2.0')
     compile('com.google.guava:guava:18.0')
+    compile('com.samskivert:jmustache:1.10')
     testCompile('junit:junit:4.12')
 }
 

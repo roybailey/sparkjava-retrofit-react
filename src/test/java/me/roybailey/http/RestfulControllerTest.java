@@ -2,10 +2,13 @@ package me.roybailey.http;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import me.roybailey.model.Task;
+import me.roybailey.model.TaskMeta;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.*;
 import retrofit.RestAdapter;
 import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 import spark.Spark;
 
 import java.io.IOException;
@@ -40,6 +43,7 @@ public class RestfulControllerTest {
                 .setEndpoint(BASE)
                 .setRequestInterceptor((request) -> request.addHeader("User-Agent", "RestfulControllerTest"))
                 .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setConverter(new GsonConverter(JsonUtil.DefaultGsonBuilder.create()))
                 .build();
     }
 
@@ -54,7 +58,7 @@ public class RestfulControllerTest {
         Response response = todoService.getStatus();
         assertEquals(HttpStatus.OK_200, response.getStatus());
 
-        Gson gson = new Gson();
+        Gson gson = JsonUtil.DefaultGsonBuilder.create();
         Type collectionType = new TypeToken<Map<String, Object>>() {
         }.getType();
         Map<String, Object> status = gson.fromJson(new InputStreamReader(response.getBody().in()), collectionType);
@@ -62,25 +66,28 @@ public class RestfulControllerTest {
         assertEquals(1, status.size());
         Map<String, Object> links = (Map<String, Object>) status.get("_links");
         assertNotNull(links);
-        assertEquals(BASE + "/api/v1/todos-meta", ((Map<String, Object>)links.get("todos-meta")).get("href"));
+        assertEquals(BASE + "/api/v1/tasks-meta", ((Map<String, Object>) links.get("tasks-meta")).get("href"));
     }
 
     @Test
-    public void getTodoCount() throws IOException {
-        RestfulService todoService = restAdapter.create(RestfulService.class);
-        Map<String, Object> todoMetaData = todoService.getTodoMeta();
+    public void getTaskCount() throws IOException {
+        RestfulService taskService = restAdapter.create(RestfulService.class);
+        RestResponse<TaskMeta> response = taskService.getTaskMeta();
 
-        assertThat(todoMetaData.get("total"), is(2.0));
+        assertThat(response.content.getTotal(), is(9));
     }
 
     @Test
-    public void getUsers() throws IOException {
-        RestfulService todoService = restAdapter.create(RestfulService.class);
-        List<Map<String,Object>> todos = todoService.getTodos();
+    public void getTasks() throws IOException {
+        RestfulService taskService = restAdapter.create(RestfulService.class);
+        RestResponse<List<Task>> response = taskService.getTasks(1,4);
+        List<Task> tasks = response.content;
 
-        assertThat(todos.size(), is(2));
-        assertNotNull(todos.get(0).get("completed"));
-        assertThat(todos.get(0).get("todo"), is("Shopping"));
-        assertThat(todos.get(1).get("todo"),is("Washing"));
+        assertThat(tasks.size(), is(4));
+        assertNotNull(tasks.get(0).getDueDate());
+        assertNotNull(tasks.get(0).getEffort());
+        assertNotNull(tasks.get(0).getProgress());
+        assertThat(tasks.get(0).getName(), is("Washing"));
+        assertThat(tasks.get(1).getName(), is("Car Service"));
     }
 }

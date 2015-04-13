@@ -1,8 +1,7 @@
 package me.roybailey.http;
 
+import me.roybailey.service.DemoTaskService;
 import org.eclipse.jetty.http.HttpStatus;
-
-import javax.sound.sampled.Port;
 
 import static spark.Spark.*;
 import static spark.Spark.after;
@@ -16,6 +15,7 @@ public class DemoService {
 
     public static void main(String[] args) {
 
+        // setup sparkjava global settings
         port(PORT);
         staticFileLocation("/webapp");
 
@@ -27,15 +27,18 @@ public class DemoService {
         after((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
         after((request, response) -> response.header("cache-control", "no-cache"));
 
+        // add some global routes
         get("/", (request, response) -> {
-            response.redirect("/index.html");
+            response.redirect("/admin.html");
             return HttpStatus.OK_200;
         });
-        get("/status", "application/json", (request, response) -> "{ version: 1.0 }");
+        get("/status", "application/json", (request, response) -> "{ \"version\": 1.0 }");
 
+        // simple dependency injection
         try {
-            new RestfulController();
-            new ReactController();
+            DemoTaskService taskService = new DemoTaskService();
+            new RestfulController(taskService);
+            new ReactController(taskService);
         } catch (Exception err) {
             throw new RuntimeException("Failed to start server", err);
         }
