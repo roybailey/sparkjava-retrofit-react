@@ -1,0 +1,33 @@
+{
+  "name": "sparkjava-retrofit-react",
+  "version": "0.0.0",
+  "description": "SparkJava and React",
+  "main": "app.js",
+  "dependencies": {
+    "path": "^0.11.14",
+    "react": "^0.13.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jshint": "^0.11.1",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-curl": "^2.2.0",
+    "grunt-react": "^0.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roybailey/sparkjava-retrofit-react.git"
+  },
+  "author": "Roy Bailey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roybailey/sparkjava-retrofit-react/issues"
+  },
+  "homepage": "https://github.com/roybailey/sparkjava-retrofit-react"
+}

@@ -14,5 +14,5 @@ Please see license.  No guarantees anything still works.
 what | description
 -----|------------
 `gradle build` | to compile and run the tests
-`jsx --watch src/main/jsx/ src/main/resources/webapp/nashorn/ --extension jsx` | compile jsx into js resource
+`jsx --watch src/main/jsx/ src/main/js/ --extension jsx` | compile jsx into js resource
 `DemoService` | Start Web Application (http://localhost:4545)

@@ -51,14 +51,16 @@ public class ReactController {
         bindings.put("JavaTaskService", taskService);
         nashorn.setBindings(bindings, ScriptContext.GLOBAL_SCOPE);
         // eval react.js
-        String polyfill = Paths.get(ClassLoader.getSystemResource("webapp/nashorn/nashorn-polyfill.js").toURI()).toString();
-        String react = Paths.get(ClassLoader.getSystemResource("webapp/react/react.js").toURI()).toString();
-        String application = Paths.get(ClassLoader.getSystemResource("webapp/nashorn/app.js").toURI()).toString();
-        String dashboard = Paths.get(ClassLoader.getSystemResource("webapp/nashorn/dashboard.js").toURI()).toString();
-        nashorn.eval(new FileReader(polyfill));
-        nashorn.eval(new FileReader(react));
-        nashorn.eval(new FileReader(application));
-        nashorn.eval(new FileReader(dashboard));
+//        String polyfill = Paths.get(ClassLoader.getSystemResource("webapp/nashorn/nashorn-polyfill.js").toURI()).toString();
+//        String react = Paths.get(ClassLoader.getSystemResource("webapp/react/react.js").toURI()).toString();
+//        String application = Paths.get(ClassLoader.getSystemResource("webapp/nashorn/app.js").toURI()).toString();
+//        String dashboard = Paths.get(ClassLoader.getSystemResource("webapp/nashorn/dashboard.js").toURI()).toString();
+//        nashorn.eval(new FileReader(polyfill));
+//        nashorn.eval(new FileReader(react));
+//        nashorn.eval(new FileReader(application));
+//        nashorn.eval(new FileReader(dashboard));
+        String bundle = Paths.get(ClassLoader.getSystemResource("webapp/bundle.min.js").toURI()).toString();
+        nashorn.eval(new FileReader(bundle));
         timer.stop();
         LOG.info("Nashorn loaded..." + timer);
 
