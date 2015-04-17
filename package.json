@@ -4,6 +4,7 @@
   "description": "SparkJava and React",
   "main": "app.js",
   "dependencies": {
+    "moment": "^2.10.2",
     "path": "^0.11.14",
     "react": "^0.13.1"
   },

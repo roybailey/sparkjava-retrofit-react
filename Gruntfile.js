@@ -65,6 +65,7 @@ module.exports = function (grunt) {
                     'src/main/resources/webapp/bundle.min.js': [
                         'src/main/js/nashorn-polyfill.js',
                         'node_modules/react/dist/react.js',
+                        'node_modules/moment/min/moment.min.js',
                         'src/main/js/app.js',
                         'src/main/js/dashboard.js'
                     ]

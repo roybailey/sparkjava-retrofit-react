@@ -190,7 +190,8 @@ var TaskTable = React.createClass({displayName: "TaskTable",
         console.log("loader result=" + rs);
         var todoRows = rs.map(function (child) {
             console.log("task=" + child.name);
-            return React.createElement(TaskTableRow, {guid: child.guid, name: child.name, dueDate: child.dueDate, effort: child.effort});
+            var dueDate = moment(Date.parse(child.dueDate)).format('L');
+            return React.createElement(TaskTableRow, {guid: child.guid, name: child.name, dueDate: dueDate, effort: child.effort});
         }.bind(this));
         return (
             React.createElement("div", {className: "block-content collapse in"}, 
