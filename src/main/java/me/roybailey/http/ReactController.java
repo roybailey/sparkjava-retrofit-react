@@ -3,6 +3,7 @@ package me.roybailey.http;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.io.ByteStreams;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
@@ -18,6 +19,8 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngineManager;
 import javax.script.SimpleBindings;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -59,8 +62,8 @@ public class ReactController {
 //        nashorn.eval(new FileReader(react));
 //        nashorn.eval(new FileReader(application));
 //        nashorn.eval(new FileReader(dashboard));
-        String bundle = Paths.get(ClassLoader.getSystemResource("webapp/bundle.min.js").toURI()).toString();
-        nashorn.eval(new FileReader(bundle));
+        //String bundle = Paths.get(ClassLoader.getSystemResource("webapp/bundle.min.js").toURI()).toString();
+        nashorn.eval(new InputStreamReader(this.getClass().getResourceAsStream("/webapp/bundle.min.js")));
         timer.stop();
         LOG.info("Nashorn loaded..." + timer);
 
@@ -94,8 +97,7 @@ public class ReactController {
         LOG.info("Loading template {} with renderer {}", template, renderer);
         Stopwatch timer = Stopwatch.createStarted();
         try {
-            Path pathTemplate = Paths.get(ClassLoader.getSystemResource("webapp/" + template).toURI());
-            String html = new String(Files.readAllBytes(pathTemplate));
+            String html = new String(ByteStreams.toByteArray(this.getClass().getResourceAsStream("/webapp/" + template)));
             // compile the template using mustache engine...
             Template tmpl = Mustache.compiler().compile(html);
             // create template tokens...
@@ -148,8 +150,8 @@ public class ReactController {
         return ImmutableList.<Map<String, Object>>builder()
                 .add(ImmutableMap.<String, Object>builder().put("name", "Used/Total Memory").put("value", Math.floor(usedMemory / totalMemory * 100)).build())
                 .add(ImmutableMap.<String, Object>builder().put("name", "Free/Total Memory").put("value", Math.floor(freeMemory / totalMemory * 100)).build())
-                .add(ImmutableMap.<String, Object>builder().put("name", "Random Statistic").put("value", Math.floor(50+50*Math.random())).build())
-                .add(ImmutableMap.<String, Object>builder().put("name", "Random Statistic").put("value", Math.floor(50+50*Math.random())).build())
+                .add(ImmutableMap.<String, Object>builder().put("name", "Random Statistic").put("value", Math.floor(50 + 50 * Math.random())).build())
+                .add(ImmutableMap.<String, Object>builder().put("name", "Random Statistic").put("value", Math.floor(50 + 50 * Math.random())).build())
                 .build();
     }
 

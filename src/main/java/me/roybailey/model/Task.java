@@ -1,6 +1,7 @@
 package me.roybailey.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -10,8 +11,17 @@ public class Task {
 
     public static class Builder {
 
-        private String name = "";
-        private String description = "";
+        private String guid;
+        private String name;
+        private String description;
+        private LocalDateTime dueDate;
+        private Integer effort;
+        private Integer progress;
+
+        public Builder withGuid(String guid) {
+            this.guid = guid;
+            return this;
+        }
 
         public Builder withName(String name) {
             this.name = name;
@@ -23,10 +33,29 @@ public class Task {
             return this;
         }
 
+        public Builder withDueDate(String dueDate) {
+            this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ISO_DATE_TIME);
+            return this;
+        }
+
+        public Builder withEffort(int effort) {
+            this.effort = effort;
+            return this;
+        }
+
+        public Builder withProgress(int progress) {
+            this.progress = progress;
+            return this;
+        }
+
         public Task build() {
             return new Task(
-                    UUID.randomUUID().toString(),
-                    this.name
+                    (this.guid == null)? UUID.randomUUID().toString() : this.guid,
+                    this.name,
+                    this.description,
+                    this.dueDate,
+                    this.effort,
+                    this.progress
             );
         }
     }
