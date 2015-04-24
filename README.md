@@ -9,6 +9,52 @@
 A Java 8 process with an embedded rest-api and web application, where the web application user interface is constructed using the React JavaScript components via the Nashorn engine with access to Java services.
 
 
+## Dependencies
+
+SparkJava and Guava keep the overall dependencies lightweight (not even a single spring library here).
+
+
+* **[SparkJava](http://sparkjava.com/)** - A minimalist Java 8 web application framework
+* **[Retrofit](http://square.github.io/retrofit/)** - A type-safe REST client for Java
+* **[ReactJS](http://facebook.github.io/react/)** - A Javascript library for building user interfaces
+* **[Bootstrap-Admin-Theme](https://github.com/VinceG/Bootstrap-Admin-Theme)** - A web dashboard courtesy of Vincent Gabriel
+* **[JMustache](https://github.com/samskivert/jmustache)** - A Java template engine
+
+Also using **[Quava](https://code.google.com/p/guava-libraries/)** and a choice of **[Gradle](http://gradle)** or **[Maven](http://maven.apache.org)** for Java builds.
+
+
+## Taking it for a spin
+
+Make sure you have `JDK 1.8.0_05-b13` or above.
+
+command | description
+--------|------------
+`gradle build` | to compile and run the tests
+`mvn clean install` | to compile and run the tests
+`grunt watch` | compile jsx into js resource (from `src/main/jsx` into `src/main/js`)
+[`DemoService`](src/main/java/me/roybailey/http/DemoService.java) | Start Web Application [http://localhost:4545](http://localhost:4545)
+
+Alternatively run the `gradle installApp` command to create a runnable distribution package in `build/install/sparkjava-retrofit-react` and run the appropriate script in the `bin` folder.
+
+> These dials are using a JavaScript charting library but are rendered using ReactJS with data from Java:
+
+![JavaScript charts with data from Java](docs/dials.png)
+
+> These tables are rendered using ReactJS with data from Java, one table uses a Java service with direct access to the data store, the other Java service calls the rest-api from within Java to obtain the same data:
+
+![ReactJS Tables](docs/tables.png)
+
+_the `?skip=2&limit=4` parameters on the request URL are passed into ReactJS and back to Java services_
+
+
+## License
+
+[`MIT license`](LICENSE)
+
+
+
+## Overview
+
 ##### The REST api
 
 The rest-api provides a simple (yet richer than the usual todo list) [`task`](src/main/java/me/roybailey/model/Task.java) data model encapsulated behind a [TaskService interface](src/main/java/me/roybailey/service/TaskService.java) (the typical Data-Access-Object pattern).  For the purpose of this exercise the tasks are seeded from a small sample of data and kept in-memory.  There are only a couple of read operations defined as the main focus is to render data.  However, this Data-Access-Object implementation could be swapped out for any Java based database or messaging connection and enriched to include fully functional CRUD (create, read, update, delete) functionality.
@@ -108,44 +154,3 @@ public interface RestfulService {
 This project was built and tested on a Mac laptop, using Chrome, with `JDK 1.8.0_05-b13`.  It has not been tested/built on any Windows or Linux platforms but should work providing you have a Java 8 installed.
 
 
-## Dependencies
-
-SparkJava and Guava keep the overall dependencies lightweight (not even a single spring library here).
-
-
-* **[SparkJava](http://sparkjava.com/)** - A minimalist Java 8 web application framework
-* **[Retrofit](http://square.github.io/retrofit/)** - A type-safe REST client for Java
-* **[ReactJS](http://facebook.github.io/react/)** - A Javascript library for building user interfaces
-* **[Bootstrap-Admin-Theme](https://github.com/VinceG/Bootstrap-Admin-Theme)** - A web dashboard courtesy of Vincent Gabriel
-* **[JMustache](https://github.com/samskivert/jmustache)** - A Java template engine
-
-Also using **[Quava](https://code.google.com/p/guava-libraries/)** and a choice of **[Gradle](http://gradle)** or **[Maven](http://maven.apache.org)** for Java builds.
-
-
-## Taking it for a spin
-
-Make sure you have `JDK 1.8.0_05-b13` or above.
-
-command | description
---------|------------
-`gradle build` | to compile and run the tests
-`mvn clean install` | to compile and run the tests
-`grunt watch` | compile jsx into js resource (from `src/main/jsx` into `src/main/js`)
-[`DemoService`](src/main/java/me/roybailey/http/DemoService.java) | Start Web Application [http://localhost:4545](http://localhost:4545)
-
-Alternatively run the `gradle installApp` command to create a runnable distribution package in `build/install/sparkjava-retrofit-react` and run the appropriate script in the `bin` folder.
-
-> These dials are using a JavaScript charting library but are rendered using ReactJS with data from Java:
-
-![JavaScript charts with data from Java](docs/dials.png)
-
-> These tables are rendered using ReactJS with data from Java, one table uses a Java service with direct access to the data store, the other Java service calls the rest-api from within Java to obtain the same data:
-
-![ReactJS Tables](docs/tables.png)
-
-_the `?skip=2&limit=4` parameters on the request URL are passed into ReactJS and back to Java services_
-
-
-## License
-
-[`MIT license`](LICENSE)
