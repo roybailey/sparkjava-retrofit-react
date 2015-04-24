@@ -80,7 +80,7 @@ Calling the rest-api will perform all operations in Java; the rest-api converts 
 
 This entire project is one big test so the only unit tests focus on testing the rest-api using [Retrofit](http://square.github.io/retrofit/).  Retrofit allows you to define a simple interface for your rest-api and leave the plumbing up to the Retrofit library.  A real gem!
 
-> Java interface of RESTful api (See [`RestfulService`](src/main/java/me/roybailey/http/RestfulService))
+> Example Java Retrofit RESTful api interface (See [`RestfulService`](src/main/java/me/roybailey/http/RestfulService) for full version)
 
 ```Java
 public interface RestfulService {
@@ -93,7 +93,7 @@ public interface RestfulService {
 }
 ```
 
-> Java test example using [Retrofit](http://square.github.io/retrofit/) (See [`RestfulControllerTest`](src/test/java/me/roybailey/http/RestfulControllerTest))
+> Example Java test using [Retrofit](http://square.github.io/retrofit/) (See [`RestfulControllerTest`](src/test/java/me/roybailey/http/RestfulControllerTest))
 
 ```Java
     RestAdapter restAdapter = new RestAdapter.Builder()
@@ -135,11 +135,11 @@ command | description
 
 Alternatively run the `gradle installApp` command to create a runnable distribution package in `build/install/sparkjava-retrofit-react` and run the appropriate script in the `bin` folder.
 
-> These dials are using a JavaScript charting library but are rendered using ReactJS with data from Java
+> These dials are using a JavaScript charting library but are rendered using ReactJS with data from Java:
 
 ![JavaScript charts with data from Java](docs/dials.png)
 
-> These tables are rendered using ReactJS with data from Java, one table uses direct Java service, the other Java service calls a rest-api from within Java to obtain the same data
+> These tables are rendered using ReactJS with data from Java, one table uses a Java service with direct access to the data store, the other Java service calls the rest-api from within Java to obtain the same data:
 
 ![ReactJS Tables](docs/tables.png)
 
