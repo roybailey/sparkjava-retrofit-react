@@ -54,8 +54,8 @@ public class RestfulControllerTest {
 
     @Test
     public void getStatus() throws IOException {
-        RestfulService todoService = restAdapter.create(RestfulService.class);
-        Response response = todoService.getStatus();
+        RestfulService taskService = restAdapter.create(RestfulService.class);
+        Response response = taskService.getStatus();
         assertEquals(HttpStatus.OK_200, response.getStatus());
 
         Gson gson = JsonUtil.DefaultGsonBuilder.create();
