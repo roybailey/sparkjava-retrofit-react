@@ -126,7 +126,7 @@ Calling the rest-api will perform all operations in Java; the rest-api converts 
 
 This entire project is one big test so the only unit tests focus on testing the rest-api using [Retrofit](http://square.github.io/retrofit/).  Retrofit allows you to define a simple interface for your rest-api and leave the plumbing up to the Retrofit library.  A real gem!
 
-> Example Java Retrofit RESTful api interface (See [`RestfulService`](src/main/java/me/roybailey/http/RestfulService) for full version)
+> Example Java Retrofit RESTful api interface (See [`RestfulService`](src/main/java/me/roybailey/http/RestfulService.java) for full version)
 
 ```Java
 public interface RestfulService {
@@ -139,7 +139,7 @@ public interface RestfulService {
 }
 ```
 
-> Example Java test using [Retrofit](http://square.github.io/retrofit/) (See [`RestfulControllerTest`](src/test/java/me/roybailey/http/RestfulControllerTest))
+> Example Java test using [Retrofit](http://square.github.io/retrofit/) (See [`RestfulControllerTest`](src/test/java/me/roybailey/http/RestfulControllerTest.java))
 
 ```Java
     RestAdapter restAdapter = new RestAdapter.Builder()
