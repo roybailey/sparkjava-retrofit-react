@@ -11,9 +11,9 @@ To build a Java 8 based process with an embedded rest-api and web application wh
 
 ##### The REST api
 
-The rest-api provides a simple (yet richer than the usual todo list) [`task`](src/main/java/me/roybailey/model/Task.java) data model encapsulated behind an interface (the typical Data-Access-Object pattern).  For the purpose of this exercise the data is seeded from a small sample of data and kept in-memory.  There are only a couple of read operations defined as the main focus is to render data.  However, this Data-Access-Object implementation could be swapped out for any Java based database or messaging connection and enriched to include fully functional CRUD (create, read, update, delete) functionality.
+The rest-api provides a simple (yet richer than the usual todo list) [`task`](src/main/java/me/roybailey/model/Task.java) data model encapsulated behind an interface (the typical Data-Access-Object pattern).  For the purpose of this exercise the tasks are seeded from a small sample of data and kept in-memory.  There are only a couple of read operations defined as the main focus is to render data.  However, this Data-Access-Object implementation could be swapped out for any Java based database or messaging connection and enriched to include fully functional CRUD (create, read, update, delete) functionality.
 
-> See [`RestfulController`](src/main/java/me/roybailey/http/RestfulController)
+> See [`RestfulController`](src/main/java/me/roybailey/http/RestfulController.java)
 
 
 ##### The User Interface
@@ -95,7 +95,7 @@ public interface RestfulService {
 
 > See [`RestfulControllerTest`](src/test/java/me/roybailey/http/RestfulControllerTest)
 
-This project was built and tested on Mac, using Chrome, with JDK 1.8.0_05-b13.  It has not been tested/built on any Windows or Linux platforms but should all work being Java based.
+This project was built and tested on a Mac laptop, using Chrome, with JDK 1.8.0_05-b13.  It has not been tested/built on any Windows or Linux platforms but should all work being Java based.
 
 
 ## Dependencies
@@ -114,12 +114,14 @@ Also using **[Quava](https://code.google.com/p/guava-libraries/)** and a choice 
 
 ## Getting Started
 
+Make sure you have `JDK 1.8.0_05-b13` or above.
+
 command | description
 --------|------------
 `gradle build` | to compile and run the tests
 `mvn clean install` | to compile and run the tests
 `grunt watch` | compile jsx into js resource (from `src/main/jsx` into `src/main/js`)
-`DemoService` | Start Web Application [http://localhost:4545](http://localhost:4545)
+[`DemoService`](src/main/java/me/roybailey/http/DemoService.java) | Start Web Application [http://localhost:4545](http://localhost:4545)
 
 Alternatively run the `gradle installApp` command to create a runnable distribution package in `build/install/sparkjava-retrofit-react` and run the appropriate script in the `bin` folder.
 
