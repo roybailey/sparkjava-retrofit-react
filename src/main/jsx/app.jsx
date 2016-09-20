@@ -7,7 +7,7 @@ var TitleView = React.createClass({
 });
 
 var renderTitle = function (javaProps) {
-    return React.renderToString(
+    return ReactDOMServer.renderToStaticMarkup(
         React.createElement(TitleView, {text: javaProps.title})
     );
 };

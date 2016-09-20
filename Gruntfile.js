@@ -65,6 +65,8 @@ module.exports = function (grunt) {
                     'src/main/resources/webapp/bundle.min.js': [
                         'src/main/js/nashorn-polyfill.js',
                         'node_modules/react/dist/react.js',
+                        'node_modules/react-dom/dist/react-dom.js',
+                        'node_modules/react-dom/dist/react-dom-server.js',
                         'node_modules/moment/min/moment.min.js',
                         'src/main/js/app.js',
                         'src/main/js/dashboard.js'
@@ -80,6 +82,14 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'node_modules/react/dist/',
+                        src: ['*'],
+                        dest: 'src/main/resources/webapp/react/',
+                        filter: 'isFile',
+                        flatten: true
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/react-dom/dist/',
                         src: ['*'],
                         dest: 'src/main/resources/webapp/react/',
                         filter: 'isFile',
